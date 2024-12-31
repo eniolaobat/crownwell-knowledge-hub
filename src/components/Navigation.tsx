@@ -1,4 +1,4 @@
-import { Home, BookOpen, TestTube, Layout, User, Settings } from "lucide-react";
+import { Home, BookOpen, PencilRuler, Trophy, Layout, User, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation() {
@@ -7,8 +7,8 @@ export default function Navigation() {
   const links = [
     { to: "/", label: "Home", icon: Home },
     { to: "/dashboard", label: "Dashboard", icon: Layout },
-    { to: "/quiz", label: "MCQs", icon: BookOpen },
-    { to: "/tests", label: "Tests", icon: TestTube },
+    { to: "/quiz", label: "Practice", icon: PencilRuler },
+    { to: "/modules", label: "Modules", icon: BookOpen },
     { to: "/profile", label: "Profile", icon: User },
     { to: "/settings", label: "Settings", icon: Settings },
   ];
