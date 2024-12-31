@@ -1,25 +1,40 @@
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import StudyOptions from "./StudyOptions";
 
 export default function WelcomeHero() {
-  const navigate = useNavigate();
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-primary to-secondary p-4 animate-fadeIn">
-      <div className="text-center space-y-6 max-w-2xl">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-          Welcome to Crownwell Tech House
-        </h1>
-        <p className="text-xl md:text-2xl text-white/90 mb-8">
-          Your journey to becoming a successful Business Analyst or Project Manager starts here.
-        </p>
-        <div className="space-y-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 animate-fadeIn">
+      <div className="max-w-2xl mx-auto space-y-8 pt-8">
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-primary">
+            Hello, 👋
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Your learning category:
+          </p>
+        </div>
+
+        {/* Category Selection */}
+        <div className="flex justify-center gap-4 p-4">
           <Button
-            onClick={() => navigate("/quiz")}
-            className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6"
+            variant="outline"
+            className="flex-1 py-8 hover:bg-blue-50"
           >
-            Start Learning
+            Business Analyst
           </Button>
+          <Button
+            variant="outline"
+            className="flex-1 py-8 hover:bg-blue-50"
+          >
+            Project Manager
+          </Button>
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-primary mb-8">
+            Let's study!
+          </h2>
+          <StudyOptions />
         </div>
       </div>
     </div>
