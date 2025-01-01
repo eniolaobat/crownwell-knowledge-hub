@@ -18,6 +18,8 @@ type Category = {
   subcategories: {
     title: string;
     topics: string[];
+    questionCount: number;
+    progress: number;
   }[];
 };
 
@@ -35,7 +37,9 @@ const categories: Category[] = [
           "Requirements gathering and documentation",
           "Process modeling and improvement",
           "Stakeholder analysis and management"
-        ]
+        ],
+        questionCount: 27,
+        progress: 0
       },
       {
         title: "BA Software and Tools Proficiency",
@@ -43,7 +47,9 @@ const categories: Category[] = [
           "Jira, Confluence, Microsoft Visio, and Balsamiq",
           "Data analysis tools (Excel, SQL, Power BI)",
           "Modeling techniques (UML, BPMN)"
-        ]
+        ],
+        questionCount: 26,
+        progress: 0
       }
     ]
   },
@@ -59,7 +65,9 @@ const categories: Category[] = [
           "Agile principles and practices",
           "Scrum framework and roles",
           "User stories and backlog management"
-        ]
+        ],
+        questionCount: 39,
+        progress: 0
       },
       {
         title: "Traditional and Hybrid Frameworks",
@@ -67,7 +75,9 @@ const categories: Category[] = [
           "Waterfall model for requirements documentation",
           "Hybrid approaches combining Agile and Waterfall",
           "Lean and Six Sigma methodologies"
-        ]
+        ],
+        questionCount: 34,
+        progress: 0
       }
     ]
   },
@@ -82,7 +92,9 @@ const categories: Category[] = [
         topics: [
           "General business principles and financial concepts",
           "Market analysis and strategic planning"
-        ]
+        ],
+        questionCount: 22,
+        progress: 0
       },
       {
         title: "Communication and Analytical Skills",
@@ -90,7 +102,9 @@ const categories: Category[] = [
           "Effective communication with stakeholders",
           "Analytical thinking and problem-solving",
           "Presentation and documentation skills"
-        ]
+        ],
+        questionCount: 45,
+        progress: 0
       }
     ]
   }
@@ -123,35 +137,39 @@ export default function Quiz() {
     return (
       <div className="min-h-screen bg-background p-4">
         <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-2xl font-bold text-primary mb-6">Select a Category</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category) => (
-              <Card 
-                key={category.id}
-                className="p-6 hover:shadow-lg transition-shadow cursor-pointer"
-                onClick={() => handleCategorySelect(category.id)}
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  {category.icon}
-                  <h3 className="text-lg font-semibold">{category.title}</h3>
-                </div>
-                <p className="text-muted-foreground text-sm mb-4">
-                  {category.description}
-                </p>
-                <div className="space-y-3">
-                  {category.subcategories.map((sub, index) => (
-                    <div key={index} className="space-y-2">
-                      <h4 className="font-medium text-sm">{sub.title}</h4>
-                      <ul className="text-sm text-muted-foreground list-disc pl-4">
-                        {sub.topics.map((topic, topicIndex) => (
-                          <li key={topicIndex}>{topic}</li>
-                        ))}
-                      </ul>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-primary">Practice Topics</h2>
+            <div className="text-sm text-muted-foreground">
+              Overall Progress: {Math.round((correctAnswers / Math.max(totalAnswered, 1)) * 100)}%
+            </div>
+          </div>
+          <div className="space-y-3">
+            {categories.flatMap(category => 
+              category.subcategories.map((subcategory, index) => (
+                <Card 
+                  key={`${category.id}-${index}`}
+                  className="p-4 hover:bg-accent/5 transition-colors cursor-pointer"
+                  onClick={() => handleCategorySelect(`${category.id}-${index}`)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      {category.icon}
+                      <div>
+                        <h3 className="font-medium">{subcategory.title}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          0/{subcategory.questionCount} Questions
+                        </p>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </Card>
-            ))}
+                    <div className="flex items-center gap-2">
+                      <div className="w-12 h-12 rounded-full border-4 border-muted flex items-center justify-center">
+                        <span className="text-sm font-medium">{subcategory.progress}%</span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -165,7 +183,9 @@ export default function Quiz() {
           <div className="space-y-1">
             <h2 className="text-2xl font-bold text-primary">Practice Quiz</h2>
             <p className="text-sm text-muted-foreground">
-              {categories.find(c => c.id === selectedCategory)?.title}
+              {selectedCategory?.split('-').map(part => 
+                categories.find(c => c.id === part)?.title
+              ).join(' - ')}
             </p>
           </div>
           <div className="text-foreground">
