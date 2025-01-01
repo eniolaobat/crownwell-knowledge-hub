@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { BookOpen, BrainCircuit, MessageSquareMore, Workflow } from "lucide-react";
 import { Category } from "./types";
 
 interface CategoryListProps {
@@ -16,41 +15,32 @@ export default function CategoryList({
   totalAnswered,
 }: CategoryListProps) {
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-primary">Practice Topics</h2>
-        <div className="text-sm text-muted-foreground">
-          Overall Progress: {Math.round((correctAnswers / Math.max(totalAnswered, 1)) * 100)}%
-        </div>
-      </div>
-      <div className="space-y-3">
-        {categories.flatMap(category => 
-          category.subcategories.map((subcategory, index) => (
-            <Card 
-              key={`${category.id}-${index}`}
-              className="p-4 hover:bg-accent/5 transition-colors cursor-pointer"
-              onClick={() => onCategorySelect(`${category.id}-${index}`)}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  {category.icon}
-                  <div>
-                    <h3 className="font-medium">{subcategory.title}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      0/{subcategory.questionCount} Questions
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 rounded-full border-4 border-muted flex items-center justify-center">
-                    <span className="text-sm font-medium">{subcategory.progress}%</span>
-                  </div>
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {categories.map((category) => (
+        <Card
+          key={category.id}
+          className="p-6 cursor-pointer hover:bg-accent transition-colors"
+          onClick={() => onCategorySelect(category.id)}
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="p-2 rounded-lg bg-primary/10">{category.icon}</div>
+            <h3 className="text-xl font-semibold">{category.title}</h3>
+          </div>
+          <p className="text-muted-foreground mb-4">{category.description}</p>
+          <div className="space-y-2">
+            {category.subcategories.map((subcategory, index) => (
+              <div key={index} className="text-sm">
+                <div className="flex justify-between items-center">
+                  <span>{subcategory.title}</span>
+                  <span className="text-muted-foreground">
+                    {subcategory.questionCount} questions
+                  </span>
                 </div>
               </div>
-            </Card>
-          ))
-        )}
-      </div>
+            ))}
+          </div>
+        </Card>
+      ))}
     </div>
   );
 }
