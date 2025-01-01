@@ -1,27 +1,9 @@
 import { useState } from "react";
 import { questions } from "@/data/questions";
-import QuizCard from "@/components/QuizCard";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { 
-  BookOpen, 
-  BrainCircuit, 
-  MessageSquareMore,
-  Workflow
-} from "lucide-react";
-
-type Category = {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  subcategories: {
-    title: string;
-    topics: string[];
-    questionCount: number;
-    progress: number;
-  }[];
-};
+import { BookOpen, BrainCircuit, MessageSquareMore, Workflow } from "lucide-react";
+import CategoryList from "@/components/quiz/CategoryList";
+import QuizSection from "@/components/quiz/QuizSection";
+import { Category } from "@/components/quiz/types";
 
 const categories: Category[] = [
   {
@@ -136,75 +118,26 @@ export default function Quiz() {
   if (!showQuiz) {
     return (
       <div className="min-h-screen bg-background p-4">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-primary">Practice Topics</h2>
-            <div className="text-sm text-muted-foreground">
-              Overall Progress: {Math.round((correctAnswers / Math.max(totalAnswered, 1)) * 100)}%
-            </div>
-          </div>
-          <div className="space-y-3">
-            {categories.flatMap(category => 
-              category.subcategories.map((subcategory, index) => (
-                <Card 
-                  key={`${category.id}-${index}`}
-                  className="p-4 hover:bg-accent/5 transition-colors cursor-pointer"
-                  onClick={() => handleCategorySelect(`${category.id}-${index}`)}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      {category.icon}
-                      <div>
-                        <h3 className="font-medium">{subcategory.title}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          0/{subcategory.questionCount} Questions
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-12 h-12 rounded-full border-4 border-muted flex items-center justify-center">
-                        <span className="text-sm font-medium">{subcategory.progress}%</span>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))
-            )}
-          </div>
-        </div>
+        <CategoryList
+          categories={categories}
+          onCategorySelect={handleCategorySelect}
+          correctAnswers={correctAnswers}
+          totalAnswered={totalAnswered}
+        />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center p-4">
-      <div className="w-full max-w-2xl mb-8">
-        <div className="flex justify-between items-center mb-6">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-bold text-primary">Practice Quiz</h2>
-            <p className="text-sm text-muted-foreground">
-              {selectedCategory?.split('-').map(part => 
-                categories.find(c => c.id === part)?.title
-              ).join(' - ')}
-            </p>
-          </div>
-          <div className="text-foreground">
-            Score: {correctAnswers}/{totalAnswered}
-          </div>
-        </div>
-        <QuizCard
-          question={questions[currentQuestionIndex]}
-          onNext={handleNext}
-          onAnswer={handleAnswer}
-        />
-        <Button 
-          variant="outline" 
-          className="mt-4"
-          onClick={() => setShowQuiz(false)}
-        >
-          Change Category
-        </Button>
-      </div>
-    </div>
+    <QuizSection
+      selectedCategory={selectedCategory}
+      currentQuestionIndex={currentQuestionIndex}
+      questions={questions}
+      correctAnswers={correctAnswers}
+      totalAnswered={totalAnswered}
+      onNext={handleNext}
+      onAnswer={handleAnswer}
+      onChangeCategory={() => setShowQuiz(false)}
+    />
   );
 }
