@@ -9,25 +9,6 @@ export default function WelcomeHero() {
           <h1 className="text-3xl md:text-4xl font-bold text-primary">
             Hello, 👋
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Your learning category:
-          </p>
-        </div>
-
-        {/* Category Selection */}
-        <div className="flex justify-center gap-4 p-4">
-          <Button
-            variant="outline"
-            className="flex-1 py-8 hover:bg-blue-50"
-          >
-            Business Analyst
-          </Button>
-          <Button
-            variant="outline"
-            className="flex-1 py-8 hover:bg-blue-50"
-          >
-            Project Manager
-          </Button>
         </div>
 
         <div className="text-center">
