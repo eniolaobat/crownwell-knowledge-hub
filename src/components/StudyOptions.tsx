@@ -21,7 +21,7 @@ export default function StudyOptions() {
       color: "text-emerald-600"
     },
     {
-      title: "Study Guide",
+      title: "Modules",
       icon: BookOpen,
       route: "/modules",
       description: "Learn key concepts",
