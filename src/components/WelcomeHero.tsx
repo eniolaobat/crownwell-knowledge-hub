@@ -8,7 +8,7 @@ export default function WelcomeHero() {
       <div className="max-w-2xl mx-auto space-y-8 pt-8">
         <div className="text-center space-y-4">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
-            BA Knowledge Hub
+            Agape Tech Hub
           </h1>
           <p className="text-white/90">Your complete Business Analyst test preparation kit</p>
         </div>
