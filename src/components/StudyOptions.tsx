@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { PencilRuler, Trophy, BookOpen, Settings } from "lucide-react";
+import { ClipboardList, Trophy, BookOpen, Settings } from "lucide-react";
 
 export default function StudyOptions() {
   const navigate = useNavigate();
@@ -8,27 +8,31 @@ export default function StudyOptions() {
   const options = [
     {
       title: "Practice",
-      icon: PencilRuler,
+      icon: ClipboardList,
       route: "/quiz",
-      description: "Test your knowledge"
+      description: "Test your knowledge",
+      color: "text-emerald-600"
     },
     {
-      title: "Tests",
+      title: "Mock Exam",
       icon: Trophy,
       route: "/tests",
-      description: "Take timed exams"
+      description: "Take timed exams",
+      color: "text-emerald-600"
     },
     {
-      title: "Modules",
+      title: "Study Guide",
       icon: BookOpen,
       route: "/modules",
-      description: "Learn key concepts"
+      description: "Learn key concepts",
+      color: "text-emerald-600"
     },
     {
       title: "Settings",
       icon: Settings,
       route: "/settings",
-      description: "Customize your experience"
+      description: "Customize your experience",
+      color: "text-emerald-600"
     }
   ];
 
@@ -37,13 +41,13 @@ export default function StudyOptions() {
       {options.map((option) => (
         <Card
           key={option.title}
-          className="p-6 text-center hover:bg-accent cursor-pointer transition-colors"
+          className="p-6 text-center hover:bg-gray-50 cursor-pointer transition-all duration-300 border-2 hover:border-emerald-100 hover:shadow-lg"
           onClick={() => navigate(option.route)}
         >
-          <div className="flex flex-col items-center gap-2">
-            <option.icon className="h-8 w-8 text-primary" />
-            <h3 className="font-semibold">{option.title}</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="flex flex-col items-center gap-3">
+            <option.icon className={`h-10 w-10 ${option.color}`} />
+            <h3 className="font-semibold text-[#1e293b]">{option.title}</h3>
+            <p className="text-sm text-gray-500">
               {option.description}
             </p>
           </div>
