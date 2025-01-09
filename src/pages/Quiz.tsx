@@ -1,11 +1,31 @@
 import { useState } from "react";
 import { questions } from "@/data/questions";
-import { BookOpen, BrainCircuit, MessageSquareMore, Workflow } from "lucide-react";
+import { BookOpen, BrainCircuit, MessageSquareMore, Workflow, Award } from "lucide-react";
 import CategoryList from "@/components/quiz/CategoryList";
 import QuizSection from "@/components/quiz/QuizSection";
 import { Category } from "@/components/quiz/types";
 
 const categories: Category[] = [
+  {
+    id: "bcs-foundation",
+    title: "BCS Foundation Certification",
+    description: "Official preparation for the BCS Foundation Certificate in Business Analysis",
+    icon: <Award className="h-6 w-6 text-primary" />,
+    subcategories: [
+      {
+        title: "BCS Foundation Practice Questions",
+        topics: [
+          "Business Analysis Planning",
+          "Investigation Techniques",
+          "Stakeholder Analysis",
+          "Business Process Modeling",
+          "Requirements Engineering"
+        ],
+        questionCount: 1000,
+        progress: 0
+      }
+    ]
+  },
   {
     id: "role-specific",
     title: "Role-Specific Knowledge",
