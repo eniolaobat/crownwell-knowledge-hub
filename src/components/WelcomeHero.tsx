@@ -6,11 +6,13 @@ export default function WelcomeHero() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A1F2C] to-background p-4">
       <div className="max-w-2xl mx-auto space-y-8 pt-8">
-        <div className="text-center space-y-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
-            Tenet Tech Hub
+        <div className="text-center space-y-4 animate-fadeIn">
+          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+            Learn & Grow
           </h1>
-          <p className="text-white/90">Empowering your tech journey with expert-led learning paths</p>
+          <p className="text-lg text-white/80 font-light">
+            Your path to becoming a certified Business Analyst starts here
+          </p>
         </div>
 
         <div className="bg-card rounded-t-3xl px-4 py-8 mt-8 border border-border/50">
