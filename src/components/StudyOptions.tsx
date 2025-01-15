@@ -11,28 +11,28 @@ export default function StudyOptions() {
       icon: ClipboardList,
       route: "/quiz",
       description: "Test your knowledge",
-      color: "text-emerald-600"
+      color: "text-[#9b87f5]"
     },
     {
       title: "Mock Exam",
       icon: Trophy,
       route: "/tests",
       description: "Take timed exams",
-      color: "text-emerald-600"
+      color: "text-[#9b87f5]"
     },
     {
       title: "Modules",
       icon: BookOpen,
       route: "/modules",
       description: "Learn key concepts",
-      color: "text-emerald-600"
+      color: "text-[#9b87f5]"
     },
     {
       title: "Settings",
       icon: Settings,
       route: "/settings",
       description: "Customize your experience",
-      color: "text-emerald-600"
+      color: "text-[#9b87f5]"
     }
   ];
 
@@ -41,7 +41,7 @@ export default function StudyOptions() {
       {options.map((option) => (
         <Card
           key={option.title}
-          className="p-6 text-center hover:bg-gray-50 cursor-pointer transition-all duration-300 border-2 hover:border-emerald-100 hover:shadow-lg"
+          className="p-6 text-center hover:bg-gray-50 cursor-pointer transition-all duration-300 border-2 hover:border-[#D6BCFA] hover:shadow-lg"
           onClick={() => navigate(option.route)}
         >
           <div className="flex flex-col items-center gap-3">
