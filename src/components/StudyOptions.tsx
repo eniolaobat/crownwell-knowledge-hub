@@ -4,10 +4,10 @@ import { ClipboardList, Trophy, BookOpen, Settings } from "lucide-react";
 
 export default function StudyOptions() {
   const navigate = useNavigate();
-  
+
   const options = [
     {
-      title: "Practice",
+      title: "Practice Questions",
       icon: ClipboardList,
       route: "/quiz",
       description: "Test your knowledge",
@@ -16,7 +16,7 @@ export default function StudyOptions() {
     {
       title: "Mock Exam",
       icon: Trophy,
-      route: "/tests",
+      route: "/quiz",  // Changed from /tests to /quiz since /tests route wasn't defined
       description: "Take timed exams",
       color: "text-[#9b87f5]"
     },
@@ -37,7 +37,7 @@ export default function StudyOptions() {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
       {options.map((option) => (
         <Card
           key={option.title}
@@ -45,11 +45,9 @@ export default function StudyOptions() {
           onClick={() => navigate(option.route)}
         >
           <div className="flex flex-col items-center gap-3">
-            <option.icon className={`h-10 w-10 ${option.color}`} />
-            <h3 className="font-semibold text-[#1e293b]">{option.title}</h3>
-            <p className="text-sm text-gray-500">
-              {option.description}
-            </p>
+            <option.icon className={`h-12 w-12 ${option.color}`} />
+            <h3 className="font-semibold text-lg">{option.title}</h3>
+            <p className="text-muted-foreground">{option.description}</p>
           </div>
         </Card>
       ))}
